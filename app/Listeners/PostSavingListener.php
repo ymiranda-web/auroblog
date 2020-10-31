@@ -6,6 +6,7 @@ use App\Events\PostSaving;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Str;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class PostSavingListener
 {
@@ -28,5 +29,6 @@ class PostSavingListener
     public function handle(PostSaving $event)
     {
         $event->post->slug = Str::slug($event->post->title);
+        $event->post->content = Markdown::convertToHtml($event->post->content_md);
     }
 }

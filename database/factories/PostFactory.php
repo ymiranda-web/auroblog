@@ -3,11 +3,13 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Post;
+use DavidBadura\FakerMarkdownGenerator\FakerProvider;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
+    $faker->addProvider(new FakerProvider($faker));
     return [
         'title' => $faker->sentence,
-        'content' => $faker->text(3000),
+        'content_md' => $faker->markdown(3000),
     ];
 });
