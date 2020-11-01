@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PostController@index')->name('index');
+Route::get('/', 'PostController@index')->name('index')->middleware(['agent.ie']);
 
 
 Auth::routes();
