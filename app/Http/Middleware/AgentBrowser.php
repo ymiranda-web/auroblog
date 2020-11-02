@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 use Jenssegers\Agent\Agent;
 
 class AgentBrowser
@@ -20,7 +21,10 @@ class AgentBrowser
         $agent->setHttpHeaders($request->headers);
         $browser = $agent->browser();
         $version = $agent->version($browser);
-        if ($version < 11) {
+
+        Log::debug($agent->getUserAgent());
+
+        if (($browser == 'IE') && ($version < 11)) {
             return redirect('https://browsehappy.com');
         }
         return $next($request);

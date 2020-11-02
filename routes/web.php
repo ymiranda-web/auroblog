@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PostController@index')->name('index')->middleware(['agent.ie']);
+Auth::routes(['register' => false]);
 
+Route::resource('admin/posts','PostController')->middleware(['auth']);
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['agent.ie'])->group(function () {
+    Route::get('/', 'PostController@index')->name('blog.index');
+    Route::get('/{post:slug}', 'PostController@show')->name('blog.show');
+});
