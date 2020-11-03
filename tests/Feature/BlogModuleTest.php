@@ -17,7 +17,7 @@ class BlogModuleTest extends TestCase
      */
     function is_shows_blog_in_ie_less_than_11()
     {
-        $this->markTestIncomplete();
+//        $this->markTestIncomplete();
         $response = $this->withHeaders([
             'User-Agent' => 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2)'
         ])->get(route('blog.index'));;
@@ -31,11 +31,11 @@ class BlogModuleTest extends TestCase
      */
     function is_shows_blog_in_ie_11()
     {
-        $this->markTestIncomplete();
+//        $this->markTestIncomplete();
         $response = $this->withHeaders([
             'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko'
         ])->get(route('blog.index'));
-        $response->assertRedirect('https://browsehappy.com');
+        $response->assertStatus(200);
     }
 
     /**

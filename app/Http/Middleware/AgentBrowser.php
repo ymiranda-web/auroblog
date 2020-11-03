@@ -17,7 +17,7 @@ class AgentBrowser
      */
     public function handle($request, Closure $next)
     {
-        $agent = new Agent();
+        $agent = app(Agent::class);
         $agent->setHttpHeaders($request->headers);
         $browser = $agent->browser();
         $version = $agent->version($browser);
